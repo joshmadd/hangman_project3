@@ -51,17 +51,52 @@ while(play[0] == 'Y'):
 	
 	while((turns > 0) and (first_isnt_sec(sec_word, disp_word))):
 		letter = sys.stdin.readline().upper()
-		temp_word = list(disp_word)
-		print(temp_word)
+		temp_word = list(disp_word)	
 		disp_word = check_sec_word(sec_word, disp_word, letter)
-		print(''.join(disp_word))
+		print("\n")
 		if(not first_isnt_sec(temp_word, disp_word)):
 			turns = turns - 1
 			if(turns > 0):
 				print("Oh, no! Your letter wasn't in the word!")
-				print("Try again you only have ", turns, "turns left!")
+				print "Try again you only have", turns, "turns left!\n"
 		elif(first_isnt_sec(sec_word, disp_word) and turns > 0):
-			print("Good job!  Now try for the other letters.")
+			print("Good job!  Now try for the other letters.\n")
+		print("_______")
+		print("      |")
+		print("      |")
+		print("      |")
+		if(turns < 6):
+			print("     000")
+			print("    0   0")
+			print("    0   0")
+			print("     000")
+		if(turns == 4):
+			print("      0")
+			print("      0")
+			print("      0")
+			print("      0")
+		elif(turns == 3):
+			print("      0")
+			print("     00")
+			print("    0 0")
+			print("   0  0")
+		elif(turns <= 2):
+			print("      0")
+			print("     000")
+			print("    0 0 0")
+			print("   0  0  0")
+		if(turns == 1):
+			print("     0")
+			print("    0")
+			print("   0")
+			print("  0")
+		if(turns == 0):
+			print("     0 0")
+			print("    0   0")
+			print("   0     0")
+			print("  0       0")
+		print("\n")
+		print(''.join(disp_word))
 	if(turns == 0):
 		print("Sorry, you lost your man to the gallows!")
 	else:
