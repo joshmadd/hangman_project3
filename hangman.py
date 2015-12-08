@@ -18,7 +18,7 @@ def create_disp_word(word):
 		i = i + 1
 	return disp_word;
 
-def check_disp_word(secret, display, letter):
+def check_sec_word(secret, display, letter):
 	i = 0
 	while(i < len(secret)):
 		if letter[0] == secret[i]:
@@ -26,18 +26,28 @@ def check_disp_word(secret, display, letter):
 		i = i + 1
 	return display
 
+def disp_isnt_sec(secret, display):
+	i = 0
+	while(i < len(secret)):
+		if secret[i] != display[i]:
+			return 1
+		else: 
+			i = i + 1
+	return 0
+
 sec_word = list(word_list[rand_num])
 disp_word = create_disp_word(sec_word)
-temp_disp = ''.join(disp_word)
 
 print(sec_word)
 
 print("\nWelcome to the game of Hangman!")
-print("Please enter a capitalized letter to begin")
-print("guessing the word displayed above.  Good luck!")
+print("Please enter a letter to begin guessing")
+print("the word displayed above.  Good luck!")
 
 letter = sys.stdin.readline().upper()
 print(letter)
 
-disp_word = check_disp_word(sec_word, disp_word, letter)
-print(disp_word)
+disp_word = check_sec_word(sec_word, disp_word, letter)
+print(''.join(disp_word))
+print(disp_isnt_sec(sec_word, sec_word))
+print(disp_isnt_sec(sec_word, disp_word))
