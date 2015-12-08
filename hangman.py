@@ -6,9 +6,6 @@ word_list = ["APPLE", "BANANA", "BLUEBERRY", "CHERRY", "GRAPE",
 	"GRAPEFRUIT", "KIWI", "LEMON", "LIME", "MANGO",
 	"NECTARINE", "ORANGE", "PEACH", "PINEAPPLE", "STRAWBERRY"]
 
-rand_num = random.randrange(0, 15)
-print(rand_num)
-
 def create_disp_word(word):
 	length = len(word)
 	disp_word = list(word)
@@ -26,28 +23,50 @@ def check_sec_word(secret, display, letter):
 		i = i + 1
 	return display
 
-def disp_isnt_sec(secret, display):
+def first_isnt_sec(first, second):
 	i = 0
-	while(i < len(secret)):
-		if secret[i] != display[i]:
+	while(i < len(first)):
+		if first[i] != second[i]:
 			return 1
 		else: 
 			i = i + 1
 	return 0
 
-sec_word = list(word_list[rand_num])
-disp_word = create_disp_word(sec_word)
+play = 'Y'
 
-print(sec_word)
+while(play[0] == 'Y'):
+	rand_num = random.randrange(0, 15)
+	turns = 6
+	
+	sec_word = list(word_list[rand_num])
+	disp_word = create_disp_word(sec_word)
+	
+	print(''.join(sec_word))
+	print(''.join(disp_word))
+	
+	print("\nWelcome to the game of Hangman!")
+	print("Please enter a letter to begin guessing")
+	print("the word displayed above to try and save")
+	print("your man from the gallows.  Good luck!")
+	
+	while((turns > 0) and (first_isnt_sec(sec_word, disp_word))):
+		letter = sys.stdin.readline().upper()
+		temp_word = list(disp_word)
+		print(temp_word)
+		disp_word = check_sec_word(sec_word, disp_word, letter)
+		print(''.join(disp_word))
+		if(not first_isnt_sec(temp_word, disp_word)):
+			turns = turns - 1
+			if(turns > 0):
+				print("Oh, no! Your letter wasn't in the word!")
+				print("Try again you only have ", turns, "turns left!")
+		elif(first_isnt_sec(sec_word, disp_word) and turns > 0):
+			print("Good job!  Now try for the other letters.")
+	if(turns == 0):
+		print("Sorry, you lost your man to the gallows!")
+	else:
+		print("Congratulations, you saved the man from the gallows!")
+	print("Well, that's game over.  Would you like to try and save someone else? (Y/N)")
+	play = sys.stdin.readline().upper()
 
-print("\nWelcome to the game of Hangman!")
-print("Please enter a letter to begin guessing")
-print("the word displayed above.  Good luck!")
-
-letter = sys.stdin.readline().upper()
-print(letter)
-
-disp_word = check_sec_word(sec_word, disp_word, letter)
-print(''.join(disp_word))
-print(disp_isnt_sec(sec_word, sec_word))
-print(disp_isnt_sec(sec_word, disp_word))
+print("Come play again!\n")
